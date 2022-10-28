@@ -475,7 +475,7 @@ Return file and marker."
 (defun org-kanban//initialize-mirrored-kanban-at-point ()
   "Create an org-kanban dynamic block at the point."
   (save-excursion
-    (insert "#+BEGIN: kanban :mirrored t\n#+END:\n"))
+    (insert "#+BEGIN: kanban :mirrored nil\n#+END:\n"))
   (org-ctrl-c-ctrl-c))
 
 (defun org-kanban//get-dynamic-block-parameters ()
@@ -766,7 +766,7 @@ PARAMS may contain `:mirrored`, `:match`, `:scope`, `:layout`, `:range`, `:depth
           (compressed (plist-get parameters :compressed)))
     (s-join " " (delq nil
                   (list "#+BEGIN: kanban"
-                    (if mirrored ":mirrored t")
+                    (if mirrored ":mirrored nil")
                     (if match (format " :match \"%s\"" match))
                     (if layout (format " :layout (\"%s\" . %s)" (car layout) (cdr layout)))
                     (if scope (format " :scope %s" scope))
@@ -777,7 +777,7 @@ PARAMS may contain `:mirrored`, `:match`, `:scope`, `:layout`, `:range`, `:depth
   "Calculate the org-kanban header for MIRRORED, MATCH, LAYOUT, SCOPE, RANGE, SORT-SPEC-STRING, DEPTH and COMPRESSED."
   (s-join " " (delq nil
                 (list "#+BEGIN: kanban"
-                  (if mirrored ":mirrored t")
+                  (if mirrored ":mirrored nil")
                   (if (and match (> (length match) 0))
                     (format ":match \"%s\"" match))
                   (if layout (format ":layout (\"%s\" . %s)" (car layout) (cdr layout)))
